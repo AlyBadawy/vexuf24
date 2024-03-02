@@ -9,7 +9,7 @@
     "jsx": "react",
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./app/javascript/*"],
+      "@/*": ["./app/javascript/src/*"],
     }
   },
   "types": ["node", "jest", "@testing-library/jest-dom"],
