@@ -7,6 +7,8 @@
     "@typescript-eslint/eslint-plugin": "^7.1.0",
     "@typescript-eslint/parser": "^7.1.0",
     "esbuild": "^0.20.1",
+    "esbuild-plugin-import-glob": "^0.1.1",
+    "esbuild-sass-plugin": "^3.1.0",
     "eslint": "^8.57.0"
   },
   "devDependencies": {
@@ -25,10 +27,12 @@
     "typescript": "^5.3.3"
   },
   "scripts": {
-    "build": "esbuild app/javascript/*.* --bundle --sourcemap --format=esm --outdir=app/assets/builds --public-path=/assets",
-    "ts:check": "tsc --project tsconfig.json --noEmit",
-    "ts:watch": "tsc --project tsconfig.json --noEmit --watch --preserveWatchOutput",
+    "build:watch": "node esbuild.config.js --watch",
+    "build": "node esbuild.config.js",
+    "lint:fix": "eslint --fix --quiet --ext .ts,.tsx,.js,.jsx --no-error-on-unmatched-pattern app/javascript/**/*",
     "lint": "eslint --quiet --ext .ts,.tsx,.js,.jsx --no-error-on-unmatched-pattern app/javascript/**/*",
-    "lint:fix": "eslint --fix --quiet --ext .ts,.tsx,.js,.jsx --no-error-on-unmatched-pattern app/javascript/**/*"
+    "test": "jest --silent --noStackTrace --coverage",
+    "ts:check": "tsc --project tsconfig.json --noEmit",
+    "ts:watch": "tsc --project tsconfig.json --noEmit --watch --preserveWatchOutput"
   }
 }
