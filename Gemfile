@@ -13,7 +13,16 @@ gem "stimulus-rails"
 gem "turbo-rails"
 
 group :development, :test do
-  gem "debug", platforms: %i[ mri windows ]
+  gem "capybara"
+  gem "database_cleaner"
+  gem "debug", platforms: %i[ mri mingw x64_mingw ]
+  gem "dotenv-rails"
+  gem "factory_bot_rails"
+  gem "faker"
+  gem "pry-byebug"
+  gem "pry-rails"
+  gem "rspec-rails"
+  gem "shoulda-matchers"
 end
 
 group :development do
@@ -23,4 +32,10 @@ group :development do
   gem "rubocop-rails"
   gem "rubocop-rspec"
   gem "web-console"
+end
+
+group :test do
+  gem "selenium-webdriver"
+  gem "simplecov"
+  gem "webdrivers"
 end
