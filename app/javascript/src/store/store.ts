@@ -6,13 +6,25 @@ import {
 } from 'react-redux';
 import { middlewares } from './middlewares';
 import { setupListeners } from '@reduxjs/toolkit/query';
+import storage from 'redux-persist/lib/storage';
+import { persistReducer, persistStore } from 'redux-persist';
+import { uiReducer } from './uiSlice';
 
-export const rootReducer = combineReducers({});
+const persistConfig = {
+  key: 'root',
+  storage,
+};
+
+export const rootReducer = combineReducers({
+  ui: uiReducer,
+});
+
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const setupStore = () =>
   configureStore({
-    reducer: rootReducer,
-    preloadedState: {},
+    reducer: persistedReducer,
+    devTools: process.env.NODE_ENV !== 'production',
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware({
         immutableCheck: false,
@@ -21,6 +33,7 @@ export const setupStore = () =>
   });
 
 export const store = setupStore();
+export const persistor = persistStore(store);
 
 setupListeners(store.dispatch);
 
