@@ -1,5 +1,5 @@
-require 'rails_helper'
+require "rails_helper"
 
-RSpec.describe "static/tos.html.erb", type: :view do
+RSpec.describe "static/tos.html.erb" do
   pending "add some examples to (or delete) #{__FILE__}"
 end

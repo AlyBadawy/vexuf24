@@ -10,6 +10,10 @@
     <%= javascript_include_tag resolve_layout, "data-turbo-track": "reload", type: "module" %>
   </head>
   <body>
+    <% if resolve_layout == "application" %>
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+    <% end %>
     <%= yield %>
   </body>
 </html>
