@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "Reacts", type: :request do
+RSpec.describe "Reacts" do
   describe "GET /dashboard" do
     it "returns http success" do
       get "/dashboard"
