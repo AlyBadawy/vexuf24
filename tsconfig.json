@@ -13,6 +13,6 @@
     }
   },
   "types": ["node", "jest", "@testing-library/jest-dom"],
-  "include": ["app/javascript/**/*.ts*", "**/*.js"],
-  "exclude": ["esbuild.config.js"]
+  "include": ["app/javascript/**/*.ts*", "**/*.js", "esbuild.config.cjs"],
+  "exclude": ["esbuild.config.cjs"]
 }
