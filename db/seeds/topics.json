@@ -1,0 +1,44 @@
+{
+  "Health": {
+    "history": [],
+    "medications": [],
+    "allergies": [],
+    "immunizations": []
+  },
+  "people": {
+    "family": {
+      "children": [],
+      "parents": [],
+      "siblings": [],
+      "extended family": [],
+      "in-laws": [],
+      "other relatives": []
+    },
+    "friends": [],
+    "coworkers": { "coworkers": [], "boss": [] },
+    "neighbors": [],
+    "acquaintances": [],
+    "roommates": [],
+    "relationships": { "partner": [], "Ex-partner": [] }
+  },
+  "events": {
+    "birthdays": [],
+    "holidays": [],
+    "anniversaries": [],
+    "weddings": [],
+    "funerals": [],
+    "graduations": [],
+    "parties": [],
+    "vacations": [],
+    "celebrations": []
+  },
+  "hobbies": [],
+  "work": {
+    "job": [],
+    "workplace": [],
+    "work hours": [],
+    "workload": [],
+    "work environment": [],
+    "work-life balance": []
+  }
+}
