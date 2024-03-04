@@ -44,3 +44,5 @@ group :test do
   gem "simplecov"
   gem "webdrivers"
 end
+
+gem "devise", "~> 4.9"

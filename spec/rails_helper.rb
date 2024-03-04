@@ -24,7 +24,7 @@ RSpec.configure do |config|
   config.use_transactional_fixtures = true
   config.before(:suite) { DatabaseCleaner.clean_with(:truncation) }
   config.before(:each) { DatabaseCleaner.strategy = :transaction }
-  config.before(:each, js: true) { DatabaseCleaner.strategy = :truncation }
+  config.before(:each, :js) { DatabaseCleaner.strategy = :truncation }
   config.before(:each) { DatabaseCleaner.start }
   config.after(:each) { DatabaseCleaner.clean }
   config.infer_spec_type_from_file_location!
