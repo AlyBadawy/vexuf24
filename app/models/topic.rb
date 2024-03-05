@@ -11,6 +11,9 @@ class Topic < ApplicationRecord
              optional: true,
              foreign_key: "parent_id"
 
+  has_many :notes_topics, dependent: :destroy
+  has_many :notes, through: :notes_topics
+
   def self.tree
     roots = where(parent_id: nil)
     roots.map(&:child_tree)
