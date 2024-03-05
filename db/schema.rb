@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_04_005248) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_04_203551) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
+
+  create_table "account_roles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "account_id", null: false
+    t.uuid "role_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_account_roles_on_account_id"
+    t.index ["role_id"], name: "index_account_roles_on_role_id"
+  end
 
   create_table "accounts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -41,17 +50,38 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_04_005248) do
     t.index ["unlock_token"], name: "index_accounts_on_unlock_token", unique: true
   end
 
-  create_table "accounts_roles", id: false, force: :cascade do |t|
-    t.bigint "account_id", null: false
-    t.bigint "role_id", null: false
-    t.index ["account_id", "role_id"], name: "index_accounts_roles_on_account_id_and_role_id"
-    t.index ["role_id", "account_id"], name: "index_accounts_roles_on_role_id_and_account_id"
+  create_table "notes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.text "content"
+    t.uuid "therapy_session_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["therapy_session_id"], name: "index_notes_on_therapy_session_id"
+  end
+
+  create_table "notes_topics", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "note_id", null: false
+    t.uuid "topic_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["note_id"], name: "index_notes_topics_on_note_id"
+    t.index ["topic_id"], name: "index_notes_topics_on_topic_id"
   end
 
   create_table "roles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_roles_on_name", unique: true
+  end
+
+  create_table "therapy_sessions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.datetime "session_datetime"
+    t.uuid "patient_id", null: false
+    t.uuid "therapist_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["patient_id"], name: "index_therapy_sessions_on_patient_id"
+    t.index ["therapist_id"], name: "index_therapy_sessions_on_therapist_id"
   end
 
   create_table "topics", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -71,4 +101,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_04_005248) do
     t.text "object_changes"
     t.index ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
   end
+
+  add_foreign_key "account_roles", "accounts"
+  add_foreign_key "account_roles", "roles"
+  add_foreign_key "notes", "therapy_sessions"
+  add_foreign_key "notes_topics", "notes"
+  add_foreign_key "notes_topics", "topics"
+  add_foreign_key "therapy_sessions", "accounts", column: "patient_id"
+  add_foreign_key "therapy_sessions", "accounts", column: "therapist_id"
 end

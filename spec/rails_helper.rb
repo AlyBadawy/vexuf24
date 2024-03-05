@@ -17,6 +17,15 @@ begin
 rescue ActiveRecord::PendingMigrationError => e
   abort e.to_s.strip
 end
+
+module RequestSpecHelper
+  def sign_in_tester
+    tester = create(:account)
+    tester.confirm
+    sign_in tester
+  end
+end
+
 RSpec.configure do |config|
   config.include ActiveSupport::Testing::TimeHelpers
 
@@ -29,6 +38,9 @@ RSpec.configure do |config|
   config.after(:each) { DatabaseCleaner.clean }
   config.infer_spec_type_from_file_location!
   config.filter_rails_from_backtrace!
+
+  config.include Devise::Test::IntegrationHelpers, type: :request
+  config.include RequestSpecHelper, type: :request
 
   Shoulda::Matchers.configure do |conf|
     conf.integrate do |with|
