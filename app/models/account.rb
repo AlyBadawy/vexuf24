@@ -5,11 +5,15 @@ class Account < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :confirmable, :lockable, :timeoutable, :trackable
 
-  has_and_belongs_to_many :roles # rubocop:disable Rails/HasAndBelongsToMany
+  has_many :account_roles, dependent: :destroy
+  has_many :roles, through: :account_roles
+
+  has_many :patient_sessions, class_name: "TherapySession", foreign_key: "patient_id", dependent: :destroy, inverse_of: :patient
+  has_many :therapist_sessions, class_name: "TherapySession", foreign_key: "therapist_id", dependent: :nullify, inverse_of: :therapist
 
   has_paper_trail
 
   def role?(role)
-    roles.any? { |r| r.name.underscore.to_sym == role }
+    roles.any? { |r| r.name.underscore.to_sym == role.underscore.to_sym }
   end
 end
