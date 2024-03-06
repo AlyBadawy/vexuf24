@@ -418,7 +418,7 @@ DEPENDENCIES
   simplecov
   sprockets-rails
   stimulus-rails
-  tailwindcss-rails
+  tailwindcss-rails (~> 2.3)
   turbo-rails
   web-console
   webdrivers
