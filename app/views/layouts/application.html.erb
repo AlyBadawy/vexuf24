@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html class="dark">
   <head>
     <title>Vexuf 24</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -16,5 +16,9 @@
       <p class="alert"><%= alert %></p>
     <% end %>
     <%= yield %>
+    <% if resolve_layout == "application" %>
+      <div id="theme-provider" >
+      </div>
+    <% end %>
   </body>
 </html>        
