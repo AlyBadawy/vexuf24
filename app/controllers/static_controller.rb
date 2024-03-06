@@ -16,4 +16,9 @@ class StaticController < ApplicationController
 
   def privacy
   end
+
+  def cookies_banner
+    session[:cookies_accepted] = params[:cookies_accepted] if params[:cookies_accepted]
+    render layout: false
+  end
 end
