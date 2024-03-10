@@ -51,8 +51,8 @@ jobs:
           cp config/database.ci.yml config/database.yml
       - name: Set up database schema
         run: bin/rails db:schema:load
-      - name: Compile CSS
-        run: yarn && bin/rails tailwindcss:build assets:precompile
+      # - name: Compile CSS
+      #   run: yarn && bin/rails tailwindcss:build assets:precompile
       - name: Display tasks
         run: rake --tasks
       - name: Run Ruby tests
