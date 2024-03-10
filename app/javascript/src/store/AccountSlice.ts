@@ -18,7 +18,6 @@ export const accountSlice = createSlice({
     },
 
     removeAccount: (state, _action: PayloadAction<void>) => {
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       state.current = initialState.current;
     },
   },

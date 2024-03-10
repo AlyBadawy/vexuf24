@@ -10,7 +10,7 @@ import {
   PrivateRoute,
   RolesRoute,
   TherapistRoute,
-} from './PrivateRoute';
+} from './RouteSwitchers';
 
 export const OnlineRouterConfig = [
   {

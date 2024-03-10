@@ -1,9 +1,9 @@
 {
   "compilerOptions": {
     "baseUrl": ".",
-    // "composite": true,
-    // "declaration": true,
-    // "declarationMap": true,
+    "composite": true,
+    "declaration": true,
+    "declarationMap": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "incremental": true,
