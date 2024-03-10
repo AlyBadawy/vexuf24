@@ -1,42 +1,31 @@
 // Entry point for the build script in your package.json
-import { DashboardApp } from '@/AppDashboard/DashboardApp';
-import { persistor, store } from '@/store/store';
-import { ThemeProvider } from '@/AppThemeProvider/ThemeProvider';
 import '@hotwired/turbo-rails';
-
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
+import { Provider } from 'react-redux';
+import { TheApp } from '@/app/TheApp';
+import { ThemeProvider } from '@/app/ThemeProvider';
+import { persistor, store } from '@/store/store';
+
 import 'react-toastify/dist/ReactToastify.css';
 
 document.addEventListener('turbo:load', () => {
   const themeEl = document.getElementById('theme-provider');
   const rootEl = document.getElementById('react-app-root');
 
-  if (rootEl) {
-    const root = createRoot(rootEl);
-    root.render(
-      <React.StrictMode>
-        <Provider store={store}>
-          <PersistGate loading={null} persistor={persistor}>
-            <DashboardApp />
-          </PersistGate>
-        </Provider>
-      </React.StrictMode>
-    );
-  } else if (themeEl) {
-    const root = createRoot(themeEl);
-    root.render(
-      <React.StrictMode>
-        <Provider store={store}>
-          <PersistGate loading={null} persistor={persistor}>
-            <ThemeProvider />
-          </PersistGate>
-        </Provider>
-      </React.StrictMode>
-    );
-  } else {
-    throw new Error('Missing required elements');
+  if (themeEl && rootEl) {
+    throw new Error('Cannot have both theme and root elements');
   }
+
+  const root = createRoot(rootEl ? rootEl : themeEl!);
+  root.render(
+    <React.StrictMode>
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          {rootEl ? <TheApp /> : <ThemeProvider />}
+        </PersistGate>
+      </Provider>
+    </React.StrictMode>
+  );
 });
