@@ -24,7 +24,7 @@ const buildOptions = {
   assetNames: '[name]-[hash].digested',
   chunkNames: '[name]-[hash].digested',
   logLevel: 'info',
-  entryPoints: ['application.ts', 'react_dashboard.tsx', 'react_admin.tsx'],
+  entryPoints: ['application.tsx', 'react_dashboard.tsx', 'react_admin.tsx'],
   external: ['*.ttf'],
   loader: {
     '.jpeg': 'file',

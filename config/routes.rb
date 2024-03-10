@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get "/about", to: "static#about"
   get "/contact", to: "static#contact"
   get "/cookies", to: "static#cookies"
+  get "/cookies_banner", to: "static#cookies_banner"
   get "/tos", to: "static#tos"
   get "/privacy", to: "static#privacy"
 

@@ -7,7 +7,7 @@ type ErrorBoundaryProps = {
 
 type ErrorBoundaryState = {
   hasError: boolean;
-  error: Error | null;
+  error?: Error;
 };
 
 class ErrorBoundary extends React.Component<
@@ -16,7 +16,7 @@ class ErrorBoundary extends React.Component<
 > {
   state = {
     hasError: false,
-    error: null,
+    error: undefined,
   };
 
   static getDerivedStateFromError(error: Error) {

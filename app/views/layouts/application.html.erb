@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html class="dark">
   <head>
     <title>Vexuf 24</title>
     <meta charset="utf-8" />
@@ -13,11 +13,15 @@
     <%= render partial: "shared/window_objects" %>
   </head>
   <body>
+    <%= turbo_frame_tag :cookies_banner, src: cookies_banner_path if session[:cookies_accepted].nil? %>
     <% if resolve_layout == "application" %>
       <p class="notice"><%= notice %></p>
       <p class="alert"><%= alert %></p>
     <% end %>
     <%= yield %>
-    <%= csp_meta_tag %>
+    <% if resolve_layout == "application" %>
+      <div id="theme-provider" >
+      </div>
+    <% end %>
   </body>
-</html>
+</html>        
