@@ -3,6 +3,10 @@ source "https://rubygems.org"
 ruby "3.3.0"
 
 gem "bootsnap", require: false
+gem "devise", "~> 4.9"
+gem "flipper", "~> 1.2"
+gem "flipper-active_record", "~> 1.2"
+gem "flipper-ui", "~> 1.2"
 gem "hashdiff"
 gem "jbuilder"
 gem "jsbundling-rails"
@@ -44,5 +48,3 @@ group :test do
   gem "simplecov"
   gem "webdrivers"
 end
-
-gem "devise", "~> 4.9"

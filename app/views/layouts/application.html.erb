@@ -2,12 +2,15 @@
 <html>
   <head>
     <title>Vexuf 24</title>
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+    <%= render partial: "shared/meta_tags" %>
     <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag resolve_layout, "data-turbo-track": "reload", type: "module" %>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= render partial: "shared/window_objects" %>
   </head>
   <body>
     <% if resolve_layout == "application" %>
@@ -15,5 +18,6 @@
       <p class="alert"><%= alert %></p>
     <% end %>
     <%= yield %>
+    <%= csp_meta_tag %>
   </body>
 </html>

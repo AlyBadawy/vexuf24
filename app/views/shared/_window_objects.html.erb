@@ -11,7 +11,8 @@
      return element ? element.getAttribute('content') : null;
    }
 
-   window.USER = jsonParse("<%= user_json(current_user) %>", {});
-   window.FLIPPERS = jsonParse("<%= flippers_json(current_user) %>", {});
+
+   window.FLIPPERS = jsonParse("<%= flippers_json(current_account) %>", {});
    window.RAILS_ENV = "<%= Rails.env %>";
+   window.GIT_REVISION =  jsonParse("<%= git_revision %>", {});
 </script>
