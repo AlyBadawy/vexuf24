@@ -1,18 +1,23 @@
 <script>
   function jsonParse(json, defaultValue) {
-   try {
-     return JSON.parse(json.replace(/&quot;/g, '"'));
-   } catch (_e) {
-     return defaultValue;
-   }
+    try {
+      return JSON.parse(json.replace(/&quot;/g, '"'));
+    } catch (_e) {
+      return defaultValue;
+    }
   }
-   function getMetaContent(name) {
-     var element = document.querySelector("meta[name='" + name + "']");
-     return element ? element.getAttribute('content') : null;
-   }
+
+  function getMetaContent(name) {
+    var element = document.querySelector("meta[name='" + name + "']");
+    return element ? element.getAttribute('content') : null;
+  }
 
 
-   window.FLIPPERS = jsonParse("<%= flippers_json(current_account) %>", {});
-   window.RAILS_ENV = "<%= Rails.env %>";
-   window.GIT_REVISION =  jsonParse("<%= git_revision %>", {});
+  window.FLIPPERS = jsonParse("<%= flippers_json(current_account) %>", {});
+  window.RAILS_ENV = "<%= Rails.env %>";
+  window.GIT_REVISION =  jsonParse("<%= git_revision %>", {});
+  window.TOASTY = {
+    NOTICE: "<%= notice %>",
+    ALERT: "<%= alert %>"
+  };
 </script>

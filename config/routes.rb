@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  # flipper route
+  constraints CanAccessFlipperUI do
+    mount Flipper::UI.app(Flipper) => "/flipper"
+  end
+
   devise_for :accounts
 
   get "up" => "rails/health#show", as: :rails_health_check
@@ -10,14 +15,11 @@ Rails.application.routes.draw do
   get "/tos", to: "static#tos"
   get "/privacy", to: "static#privacy"
 
-  get "/dashboard", to: "react#dashboard"
-  get "/admin", to: "react#admin"
-
-  # Defines the root path route ("/")
-  root "static#home"
+  get "/app", to: "react#app"
 
   namespace :api, defaults: { format: :json } do
     get "/accounts/me", to: "accounts#me", as: "me_accounts"
+    delete "/accounts/sign_me_out", to: "accounts#sign_me_out", as: "sign_me_out_accounts"
     resources :accounts
     resources :roles
 
@@ -25,4 +27,8 @@ Rails.application.routes.draw do
 
     resources :notes
   end
+
+  # Defines the root path route ("/")
+  root "static#home"
+  get "/app/*path", to: "react#app"
 end

@@ -1,22 +1,27 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import { setupListeners } from '@reduxjs/toolkit/query';
 import {
   useDispatch,
-  type TypedUseSelectorHook,
   useSelector,
+  type TypedUseSelectorHook,
 } from 'react-redux';
-import { middlewares } from './middlewares';
-import { setupListeners } from '@reduxjs/toolkit/query';
-import storage from 'redux-persist/lib/storage';
 import { persistReducer, persistStore } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
+import { middlewares } from './middlewares';
+import { accountReducer } from './AccountSlice';
 import { uiReducer } from './uiSlice';
+import { appApi } from './appApi';
 
 const persistConfig = {
   key: 'root',
   storage,
+  blacklist: ['api'],
 };
 
 export const rootReducer = combineReducers({
+  [appApi.reducerPath]: appApi.reducer,
   ui: uiReducer,
+  account: accountReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

@@ -1,16 +1,9 @@
 require "rails_helper"
 
 RSpec.describe "Reacts" do
-  describe "GET /dashboard" do
+  describe "GET /app" do
     it "returns http success" do
-      get "/dashboard"
-      expect(response).to have_http_status(:success)
-    end
-  end
-
-  describe "GET /admin" do
-    it "returns http success" do
-      get "/admin"
+      get "/app"
       expect(response).to have_http_status(:success)
     end
   end

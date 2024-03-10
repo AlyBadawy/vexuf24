@@ -22,10 +22,10 @@ module ApplicationHelper
     message = ""
     if Rails.env.production?
       git_revision = Dir.chdir(production_dir) { `git rev-parse HEAD`.strip }
-      git_tag = Dir.chdir(production_dir) { `git describe --tags --abbrev=0`.strip }
+      git_tag = Dir.chdir(production_dir) { `git describe --tags --abbrev=0 --always`.strip }
     else
       git_revision = `git rev-parse HEAD`.strip
-      git_tag = `git describe --tags --abbrev=0`.strip
+      git_tag = `git describe --tags --abbrev=0 --always`.strip
     end
     if git_tag.present?
       git_tag.gsub!(/^v/, "")

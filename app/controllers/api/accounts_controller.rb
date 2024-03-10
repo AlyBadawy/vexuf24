@@ -19,6 +19,12 @@ module Api
       render :show
     end
 
+    def sign_me_out
+      @account = current_account
+      sign_out(@account)
+      head :no_content
+    end
+
     # POST /accounts
     def create
       @account = Account.new(account_params)
