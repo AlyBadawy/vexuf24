@@ -1,7 +1,7 @@
 // Entry point for the build script in your package.json
-import { DashboardApp } from '@/dashboardApp/DashboardApp';
+import { DashboardApp } from '@/AppDashboard/DashboardApp';
 import { persistor, store } from '@/store/store';
-import { ThemeProvider } from '@/themeProviderApp/ThemeProvider';
+import { ThemeProvider } from '@/AppThemeProvider/ThemeProvider';
 import '@hotwired/turbo-rails';
 
 import React from 'react';

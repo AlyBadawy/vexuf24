@@ -1,9 +1,9 @@
 {
   "compilerOptions": {
     "baseUrl": ".",
-    "composite": true,
-    "declaration": true,
-    "declarationMap": true,
+    // "composite": true,
+    // "declaration": true,
+    // "declarationMap": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "incremental": true,
@@ -17,7 +17,7 @@
     "skipLibCheck": true,
     "sourceMap": true,
     "strict": true,
-    "target": "ES2022",
+    "target": "es2016",
     "typeRoots": ["./node_modules/@types", "app/javascript/src/types"],
   },
   "include": ["app/javascript/**/*.ts*", "app/javascript/**/*.d.ts", "**/*.js", "esbuild.config.cjs"],

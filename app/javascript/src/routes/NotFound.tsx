@@ -7,7 +7,7 @@ const NotFound = () => {
       <main className='flex flex-col flex-1 mx-4'>
         <div className='mx-5 m-auto flex flex-col space-y-6 md:w-1/2 md:mx-auto'>
           <h1 className='text-xl font-bold align-middle md:text-3xl lg:text-4xl'>
-            Error: 404s
+            Error: 404
             <br />
             Page not found!
           </h1>

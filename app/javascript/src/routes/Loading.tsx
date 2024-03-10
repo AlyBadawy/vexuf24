@@ -9,7 +9,7 @@ export const Loading = () => {
           alt='Sys4 Logo'
           className='h-8 opacity-50 animate-bounce'
         />
-        <div className='animate-pulse'>Loading ...</div>
+        <div className='animate-pulse'>Loading...</div>
       </div>
     </div>
   );

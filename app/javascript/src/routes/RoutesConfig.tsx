@@ -35,7 +35,7 @@ export const OnlineRouterConfig = [
           {
             path: 'patient',
             element: <PatientRoute />,
-            children: [{ index: true, element: <p>Pati App Route</p> }],
+            children: [{ index: true, element: <p>Patient App Route</p> }],
           },
           {
             path: 'roles',
