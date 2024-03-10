@@ -4,7 +4,7 @@ import { appApi } from './appApi';
 
 const middlewares: Middleware[] = [];
 
-if (process.env.NODE_ENV !== 'production') {
+if (process.env.NODE_ENV === 'development') {
   const logger = createLogger({
     collapsed: true,
     diff: true,

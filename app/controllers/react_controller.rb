@@ -1,7 +1,4 @@
 class ReactController < ApplicationController
-  def dashboard
-  end
-
-  def admin
+  def app
   end
 end

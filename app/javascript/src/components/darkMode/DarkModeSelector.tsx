@@ -25,14 +25,24 @@ export const DarkModeSelector = () => {
 
   return (
     <Select onValueChange={handleModeChange} defaultValue={currentMode}>
-      <SelectTrigger className='w-[180px]'>
+      <SelectTrigger
+        className='w-[180px]'
+        data-testid='dark-mode-selector-trigger'
+      >
         <SelectValue placeholder='Select a theme' />
       </SelectTrigger>
       <SelectContent>
-        <SelectGroup>
+        <SelectGroup data-testid='dark-mode-selector'>
           <SelectLabel>Theme</SelectLabel>
-          <SelectItem value='dark'>Dark</SelectItem>
-          <SelectItem value='light'>Light</SelectItem>
+          <SelectItem data-testid='dark-mode-selector-option-dark' value='dark'>
+            Dark
+          </SelectItem>
+          <SelectItem
+            data-testid='dark-mode-selector-option-light'
+            value='light'
+          >
+            Light
+          </SelectItem>
         </SelectGroup>
       </SelectContent>
     </Select>

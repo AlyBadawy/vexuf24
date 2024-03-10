@@ -1,8 +1,6 @@
 /* eslint-disable no-undef */
 /* eslint-disable @typescript-eslint/naming-convention */
 
-/** @type {import('ts-jest/dist/types').InitialOptionsTsJest} */
-
 module.exports = {
   preset: 'ts-jest',
   testEnvironment: 'jsdom',
@@ -10,5 +8,8 @@ module.exports = {
     '^.+\\.(ts|tsx)$': 'ts-jest',
   },
   testMatch: ['**/*.test.(tsx|jsx)'],
-  setupFilesAfterEnv: ['./app/javascript/jest/jest.setup.ts'],
+  moduleNameMapper: {
+    '^@/(.*)$': '<rootDir>/app/javascript/src/$1',
+  },
+  setupFilesAfterEnv: ['./app/javascript/src/__tests__/jest.setup.ts'],
 };

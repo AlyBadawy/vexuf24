@@ -26,6 +26,13 @@ RSpec.describe "Api::Accounts" do
     end
   end
 
+  describe "Delete /sign_me_out" do
+    it "Signs off the current user" do
+      delete api_sign_me_out_accounts_path
+      expect(response).to have_http_status(:no_content)
+    end
+  end
+
   describe "POST /create" do
     let(:valid_attributes) { { email: "test@example.com", password: "password" } }
 

@@ -24,8 +24,9 @@ const buildOptions = {
   assetNames: '[name]-[hash].digested',
   chunkNames: '[name]-[hash].digested',
   logLevel: 'info',
-  entryPoints: ['application.tsx', 'react_dashboard.tsx', 'react_admin.tsx'],
+  entryPoints: ['application.tsx'],
   external: ['*.ttf'],
+  splitting: true,
   loader: {
     '.jpeg': 'file',
     '.jpg': 'file',
@@ -40,7 +41,6 @@ const buildOptions = {
   sourcemap: !isProduction,
   tsconfig: '../../tsconfig.json',
   format: 'esm',
-  splitting: true,
   inject: ['react-shim.ts'],
   mainFields: ['module', 'main', 'browser'],
 };
