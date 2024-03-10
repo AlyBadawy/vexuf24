@@ -20,6 +20,7 @@ gem "tailwindcss-rails", "~> 2.3"
 gem "turbo-rails"
 
 group :development, :test do
+  gem "brakeman"
   gem "capybara"
   gem "database_cleaner"
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
