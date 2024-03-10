@@ -51,38 +51,37 @@ jobs:
           cp config/database.ci.yml config/database.yml
       - name: Set up database schema
         run: bin/rails db:schema:load
-      # - name: Compile CSS
-      #   run: yarn && bin/rails tailwindcss:build assets:precompile
       - name: Display tasks
         run: rake --tasks
       - name: Run Ruby tests
         run: bin/rake --trace
-      - name: Jest tests
+      - name: Run JavaScript tests
         run: yarn test
+      - name: Run linting
+        run: yarn lint
+      - name: Run TypeScript checks
+        run: yarn ts:check
       - name: Security audit dependencies
         run: bundle exec bundler-audit --update
       - name: Security audit application code
         run: bundle exec brakeman -q -w2
-
-  # lint:
-  #   runs-on: ubuntu-latest
-  #   environment: test
-  #   steps:
-  #     - name: Checkout code
-  #       uses: actions/checkout@v3
-  #     - name: Install Ruby and gems
-  #       uses: ruby/setup-ruby@v1
-  #       with:
-  #         bundler-cache: true
-  #     - name: Setup Node
-  #       uses: actions/setup-node@v3
-  #       with:
-  #         node-version: 19.x
-  #         cache: yarn
-  #     # Add or replace any other lints here
-  #     - name: Security audit dependencies
-  #       run: bin/bundler-audit --update
-  #     - name: Security audit application code
-  #       run: bin/brakeman -q -w2
-  #     - name: Lint Ruby files
-  #       run: bin/rubocop --parallel
+      - name: Upload test coverage
+        uses: actions/upload-artifact@v2
+        with:
+          name: coverage
+          path: coverage
+      - name: Upload test results
+        uses: actions/upload-artifact@v2
+        with:
+          name: test-results
+          path: test-results
+      - name: Upload logs
+        uses: actions/upload-artifact@v2
+        with:
+          name: logs
+          path: log
+      - name: Upload screenshots
+        uses: actions/upload-artifact@v2
+        with:
+          name: screenshots
+          path: tmp/screenshots
