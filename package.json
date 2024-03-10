@@ -61,5 +61,6 @@
     "test": "jest --silent --noStackTrace --coverage",
     "ts:check": "tsc --project tsconfig.json --noEmit",
     "ts:watch": "tsc --project tsconfig.json --noEmit --watch --preserveWatchOutput"
-  }
+  },
+  "packageManager": "yarn@4.1.1"
 }
