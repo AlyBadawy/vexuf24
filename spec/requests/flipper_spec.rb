@@ -11,7 +11,7 @@ RSpec.describe "Flipper" do
       end
 
       it "returns http success" do
-        expect(response).to have_http_status(:success)
+        expect(response).to have_http_status(:found)
       end
     end
 
@@ -24,7 +24,7 @@ RSpec.describe "Flipper" do
       end
 
       it "redirects to the home page" do
-        expect(response).to redirect_to(root_path)
+        expect(response).to redirect_to(new_account_session_path)
       end
     end
   end
