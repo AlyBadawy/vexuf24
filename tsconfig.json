@@ -16,13 +16,9 @@
     "skipLibCheck": true,
     "sourceMap": true,
     "strict": true,
-    "target": "ES2022",
-    "ts-node": {
-      "esm": true,
-      "experimentalSpecifierResolution": "node"
-    },
-    "types": ["node", "jest", "@testing-library/jest-dom", "@types/jest"],
-    "include": ["app/javascript/**/*.ts*", "**/*.js", "esbuild.config.cjs"],
-    "exclude": []
-  }
+    "target": "ES2022"
+  },
+  "include": ["app/javascript/**/*.ts*", "**/*.js", "esbuild.config.cjs"],
+  "exclude": [],
+  "types": ["node", "jest", "@testing-library/jest-dom", "@types/jest"]
 }
