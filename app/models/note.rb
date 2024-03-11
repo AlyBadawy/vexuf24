@@ -4,4 +4,6 @@ class Note < ApplicationRecord
   has_many :topics, through: :notes_topics
 
   validates :content, presence: true
+
+  has_paper_trail
 end
