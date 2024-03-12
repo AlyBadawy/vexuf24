@@ -18,8 +18,8 @@ global.Request = Request;
 global.Response = Response;
 
 export const handlers = [
-  rest.get('http://localhost/api/status/ok', (_req, res, ctx) => {
-    return res(ctx.json({ status: 'ok' }));
+  rest.get('http://localhost/api/accounts/me', (_req, res, ctx) => {
+    return res(ctx.status(401));
   }),
 ];
 

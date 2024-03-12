@@ -13,10 +13,9 @@ const CSRFToken = () => {
     ?.getAttribute('content');
   return token;
 };
-
 const baseQuery = fetchBaseQuery({
   baseUrl: '/api',
-  prepareHeaders: (headers) => {
+  prepareHeaders: (headers: Headers) => {
     const token = CSRFToken();
     if (token) {
       headers.set('X-CSRF-Token', token);
@@ -30,7 +29,26 @@ const baseQueryWithAuth = async (
   api: BaseQueryApi,
   extraOptions: Record<string, unknown>
 ) => {
+  // convert the args to snake_case
+  if (typeof args === 'object' && args.body) {
+    args.body = JSON.stringify(
+      JSON.parse(
+        JSON.stringify(args.body).replace(
+          /(\w)([A-Z])/g,
+          (m) => `${m[0]}_${m[1].toLowerCase()}`
+        )
+      )
+    );
+  }
+
   const result = await baseQuery(args, api, extraOptions);
+
+  // convert the result to camelCase
+  if (result.data) {
+    result.data = JSON.parse(
+      JSON.stringify(result.data).replace(/_(\w)/g, (m) => m[1].toUpperCase())
+    );
+  }
 
   if (result?.error?.status === 401) {
     api.dispatch(removeAccount());

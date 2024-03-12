@@ -1,14 +1,14 @@
 import React from 'react';
 import { ComponentLoader } from './ComponentLoader';
+import { Layout } from './Layout';
 import NotFound from './NotFound';
 import OfflineApp from './OfflineApp';
-import { Layout } from './Layout';
 import {
   AdminRoute,
+  AppRoute,
   GuestRoute,
   PatientRoute,
   PrivateRoute,
-  RolesRoute,
   TherapistRoute,
 } from './RouteSwitchers';
 
@@ -18,10 +18,24 @@ export const OnlineRouterConfig = [
     element: <Layout />,
     errorElement: <ComponentLoader component={<NotFound />} />,
     children: [
-      { index: true, element: <RolesRoute /> },
       {
+        path: 'guest',
+        element: <GuestRoute />,
+        children: [{ path: '*', element: <p>Guest App Route</p> }],
+      },
+      {
+        path: '*',
         Element: <PrivateRoute />,
         children: [
+          {
+            index: true,
+            element: <AppRoute />,
+          },
+          {
+            path: 'roles',
+            element: <PrivateRoute />,
+            children: [{ index: true, element: <p>Roles App Route</p> }],
+          },
           {
             path: 'admin',
             element: <AdminRoute />,
@@ -37,15 +51,7 @@ export const OnlineRouterConfig = [
             element: <PatientRoute />,
             children: [{ index: true, element: <p>Patient App Route</p> }],
           },
-          {
-            path: 'roles',
-            element: <p>select Role</p>,
-          },
         ],
-      },
-      {
-        element: <GuestRoute />,
-        children: [{ path: 'guest', element: <p>Guest App Route</p> }],
       },
     ],
   },
