@@ -53,7 +53,7 @@ therapist_account = Account.find_by(email: "therapist@example.com")
   # Create 3 notes for each session
   3.times do |j|
     note = Note.create(
-      content: "Note #{j + 1} for Therapy Session #{i + 1}",
+      content: { text: "Note #{j + 1} for Therapy Session #{i + 1}", position: j + 1 },
       therapy_session: session,
     )
 

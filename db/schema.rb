@@ -70,7 +70,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_11_060651) do
   end
 
   create_table "notes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.text "content"
+    t.jsonb "content"
     t.uuid "therapy_session_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
