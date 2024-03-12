@@ -1,46 +1,43 @@
-import {
-  useIsAdmin,
-  useIsPatient,
-  useIsTherapist,
-  useRoles,
-} from '@/hooks/useAccount';
-import { useAppSelector } from '@/store/store';
+import { useAppDispatch, useAppSelector } from '@/store/store';
+import { setCurrentRole, unSetCurrentRole } from '@/store/uiSlice';
+import { Roles } from '@/types/Role';
 import * as React from 'react';
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
 
 export const GuestRoute = () => {
-  const roles = useRoles();
+  const dispatch = useAppDispatch();
+  const roles = useAppSelector((state) => state.account.current?.roles || []);
   const location = useLocation();
+  dispatch(unSetCurrentRole());
   return roles.length > 0 ? (
     <Navigate to='/app' state={{ from: location }} replace />
   ) : (
-    <>
-      <p>Guest: </p>
-      <Outlet />
-    </>
+    <Outlet />
   );
 };
 
 export const PrivateRoute = () => {
-  const isLoggedIn = useAppSelector(
-    (state) => !!state.account.current && state.account.current.roles.length > 0
-  );
+  const dispatch = useAppDispatch();
   const location = useLocation();
-  return isLoggedIn ? (
-    <>
-      <p>Private: </p>
-      <Outlet />
-    </>
-  ) : (
-    <Navigate to='/app/guest' state={{ from: location }} replace />
+  const isLoggedIn = useAppSelector(
+    (state) =>
+      !!state.account.current?.roles && state.account.current.roles.length > 0
   );
+  if (isLoggedIn) {
+    dispatch(unSetCurrentRole());
+    return <Outlet />;
+  }
+  return <Navigate to='/app/guest' state={{ from: location }} replace />;
 };
 
-export const RolesRoute = () => {
+export const AppRoute = () => {
+  const dispatch = useAppDispatch();
   const hasRoles = useAppSelector(
-    (state) => !!state.account.current && state.account.current.roles.length > 0
+    (state) =>
+      !!state.account.current?.roles && state.account.current.roles.length > 0
   );
   const location = useLocation();
+  dispatch(unSetCurrentRole());
   return hasRoles ? (
     <Navigate to='/app/roles' state={{ from: location }} replace />
   ) : (
@@ -49,34 +46,51 @@ export const RolesRoute = () => {
 };
 
 export const AdminRoute = () => {
-  const isAdmin = useIsAdmin();
-
+  const dispatch = useAppDispatch();
   const location = useLocation();
-  return isAdmin ? (
-    <Outlet />
-  ) : (
-    <Navigate to='/app' state={{ from: location }} replace />
+  const isAdmin = useAppSelector(
+    (state) =>
+      !!state.account.current?.roles
+        ?.map((role) => role.name)
+        .includes(Roles.Admin)
   );
+  if (isAdmin) {
+    dispatch(setCurrentRole(Roles.Admin));
+    return <Outlet />;
+  }
+  return <Navigate to='/app' state={{ from: location }} replace />;
 };
 
 export const TherapistRoute = () => {
-  const isTherapist = useIsTherapist();
-
+  const dispatch = useAppDispatch();
   const location = useLocation();
-  return isTherapist ? (
-    <Outlet />
-  ) : (
-    <Navigate to='/app' state={{ from: location }} replace />
+  const isTherapist = useAppSelector(
+    (state) =>
+      !!state.account.current?.roles
+        ?.map((role) => role.name)
+        .includes(Roles.Therapist)
   );
+
+  if (isTherapist) {
+    dispatch(setCurrentRole(Roles.Therapist));
+    return <Outlet />;
+  }
+  return <Navigate to='/app' state={{ from: location }} replace />;
 };
 
 export const PatientRoute = () => {
-  const isPatient = useIsPatient();
-
+  const dispatch = useAppDispatch();
   const location = useLocation();
-  return isPatient ? (
-    <Outlet />
-  ) : (
-    <Navigate to='/app' state={{ from: location }} replace />
+  const isPatient = useAppSelector(
+    (state) =>
+      !!state.account.current?.roles
+        ?.map((role) => role.name)
+        .includes(Roles.Patient)
   );
+
+  if (isPatient) {
+    dispatch(setCurrentRole(Roles.Patient));
+    return <Outlet />;
+  }
+  return <Navigate to='/app' state={{ from: location }} replace />;
 };
