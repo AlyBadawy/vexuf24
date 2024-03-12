@@ -34,7 +34,12 @@ RSpec.describe "Api::Accounts" do
   end
 
   describe "POST /create" do
-    let(:valid_attributes) { { email: "test@example.com", password: "password" } }
+    let(:valid_attributes) {
+      { email: "test@example.com",
+        password: "password",
+        first_name: Faker::Name.first_name,
+        last_name: Faker::Name.last_name }
+    }
 
     it "creates a new Account" do
       expect {

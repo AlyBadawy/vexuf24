@@ -18,7 +18,20 @@ export const AccountApi = apiWithTag.injectEndpoints({
       }),
       invalidatesTags: ['Account'],
     }),
+
+    updateAccount: build.mutation<void, Account>({
+      query: (account: Account) => ({
+        url: '/accounts',
+        method: 'update',
+        body: account,
+      }),
+      invalidatesTags: ['Account'],
+    }),
   }),
 });
 
-export const { useGetAccountQuery, useSignOutAccountMutation } = AccountApi;
+export const {
+  useGetAccountQuery,
+  useSignOutAccountMutation,
+  useUpdateAccountMutation,
+} = AccountApi;

@@ -10,18 +10,18 @@
   "prefer_related_applications": false,
   "icons": [
     {
-      "src": "/images/sys4.144.png",
+      "src": "/images/uf.144.png",
       "type": "image/png",
       "sizes": "144x144"
     },
     {
-      "src": "/images/sys4.192.png",
+      "src": "/images/uf.192.png",
       "type": "image/png",
       "sizes": "192x192",
       "purpose": "any maskable"
     },
     {
-      "src": "/images/sys4.512.png",
+      "src": "/images/uf.512.png",
       "type": "image/png",
       "sizes": "512x512"
     }

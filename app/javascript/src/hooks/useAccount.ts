@@ -2,11 +2,12 @@ import { useGetAccountQuery } from '@/store/AccountApi';
 import { removeAccount, setAccount } from '@/store/AccountSlice';
 import { useAppDispatch, useAppSelector } from '@/store/store';
 import { Roles } from '@/types/Role';
-import { useEffect } from 'react';
 import { isEqual } from 'lodash';
+import { useEffect } from 'react';
 
 export const useAccount = () => {
   const { currentData, isSuccess, error } = useGetAccountQuery();
+
   const dispatch = useAppDispatch();
 
   useEffect(() => {

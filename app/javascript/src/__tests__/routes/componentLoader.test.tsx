@@ -1,4 +1,3 @@
-// ComponentLoader.test.tsx
 import React, { lazy } from 'react';
 import { screen, waitForElementToBeRemoved } from '@testing-library/react';
 import { ComponentLoader } from '../../routes/ComponentLoader';
