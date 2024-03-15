@@ -18,7 +18,7 @@ export const DarkModeToggler = () => {
   };
 
   return (
-    <div className='absolute right-1 top-4'>
+    <div className='fixed right-1 bottom-12'>
       <Button onClick={toggleDarkMode} data-testid='dark-mode-toggler'>
         {currentMode === 'dark' ? <Sun /> : <Moon />}
       </Button>

@@ -1,1 +1,5 @@
-["Admin", "Therapist", "Patient"]
+[
+  { "name": "Admin", "position": 1 },
+  { "name": "Therapist", "position": 2 },
+  { "name": "Patient", "position": 3 }
+]
