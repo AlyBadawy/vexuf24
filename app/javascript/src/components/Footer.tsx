@@ -13,12 +13,13 @@ export const Footer = () => {
   const handleLogout = () => {
     void signOut().then(() => {
       dispatch(removeAccount());
+      // window.location.href = '/';
     });
   };
 
   return (
-    <footer className='bg-gray-950 border-t-2 border-gray-900 text-gray-400 text-xs mt-2 fixed bottom-0 w-full max-h-8'>
-      <div className='container mx-auto py-1 px-4'>
+    <footer className='w-full max-h-8 bg-primary/5 border-t border-primary/20 text-gray-500 text-xs'>
+      <div className='py-1 px-4'>
         <div className='flex justify-between items-center gap-4'>
           <div className='flex items-center gap-4'>
             <div className='border-rig'>

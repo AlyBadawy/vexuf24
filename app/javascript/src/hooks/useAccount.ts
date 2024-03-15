@@ -21,10 +21,11 @@ export const useAccount = () => {
 
 export const useRoles = () => {
   useAccount();
-  return useAppSelector(
+  const roles = useAppSelector(
     (state) => state.account.current?.roles || [],
     (a, b) => isEqual(a, b)
   );
+  return [...roles].sort((a, b) => a.position - b.position);
 };
 
 export const useIsAdmin = () => {

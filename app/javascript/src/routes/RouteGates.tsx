@@ -1,14 +1,25 @@
 import { useAppDispatch, useAppSelector } from '@/store/store';
 import { setCurrentRole, unSetCurrentRole } from '@/store/uiSlice';
 import { Roles } from '@/types/Role';
+import { isEqual } from 'lodash';
 import * as React from 'react';
+import { useEffect } from 'react';
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
 
 export const GuestRoute = () => {
   const dispatch = useAppDispatch();
-  const roles = useAppSelector((state) => state.account.current?.roles || []);
+  const roles = useAppSelector(
+    (state) => state.account.current?.roles || [],
+    (a, b) => isEqual(a, b)
+  );
+
+  useEffect(() => {
+    if (roles.length > 0) {
+      dispatch(unSetCurrentRole());
+    }
+  }, [dispatch, roles]);
+
   const location = useLocation();
-  dispatch(unSetCurrentRole());
   return roles.length > 0 ? (
     <Navigate to='/app' state={{ from: location }} replace />
   ) : (
@@ -17,27 +28,23 @@ export const GuestRoute = () => {
 };
 
 export const PrivateRoute = () => {
-  const dispatch = useAppDispatch();
   const location = useLocation();
   const isLoggedIn = useAppSelector(
     (state) =>
       !!state.account.current?.roles && state.account.current.roles.length > 0
   );
   if (isLoggedIn) {
-    dispatch(unSetCurrentRole());
     return <Outlet />;
   }
   return <Navigate to='/app/guest' state={{ from: location }} replace />;
 };
 
 export const AppRoute = () => {
-  const dispatch = useAppDispatch();
   const hasRoles = useAppSelector(
     (state) =>
       !!state.account.current?.roles && state.account.current.roles.length > 0
   );
   const location = useLocation();
-  dispatch(unSetCurrentRole());
   return hasRoles ? (
     <Navigate to='/app/roles' state={{ from: location }} replace />
   ) : (
@@ -54,8 +61,14 @@ export const AdminRoute = () => {
         ?.map((role) => role.name)
         .includes(Roles.Admin)
   );
+
+  useEffect(() => {
+    if (isAdmin) {
+      dispatch(setCurrentRole(Roles.Admin));
+    }
+  }, [dispatch, isAdmin]);
+
   if (isAdmin) {
-    dispatch(setCurrentRole(Roles.Admin));
     return <Outlet />;
   }
   return <Navigate to='/app' state={{ from: location }} replace />;
@@ -71,8 +84,13 @@ export const TherapistRoute = () => {
         .includes(Roles.Therapist)
   );
 
+  useEffect(() => {
+    if (isTherapist) {
+      dispatch(setCurrentRole(Roles.Therapist));
+    }
+  }, [dispatch, isTherapist]);
+
   if (isTherapist) {
-    dispatch(setCurrentRole(Roles.Therapist));
     return <Outlet />;
   }
   return <Navigate to='/app' state={{ from: location }} replace />;
@@ -88,8 +106,13 @@ export const PatientRoute = () => {
         .includes(Roles.Patient)
   );
 
+  useEffect(() => {
+    if (isPatient) {
+      dispatch(setCurrentRole(Roles.Patient));
+    }
+  }, [dispatch, isPatient]);
+
   if (isPatient) {
-    dispatch(setCurrentRole(Roles.Patient));
     return <Outlet />;
   }
   return <Navigate to='/app' state={{ from: location }} replace />;

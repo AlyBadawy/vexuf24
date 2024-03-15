@@ -1,7 +1,7 @@
 // ErrorBoundary.test.tsx
 import React from 'react';
 import { screen } from '@testing-library/react';
-import { ErrorBoundary } from '../../components/errorBoundry/ErrorBoundary';
+import { ErrorBoundary } from '../../components/errorBoundary/ErrorBoundary';
 import { ufRender } from '@/__tests__/testUtils';
 
 // This is a dummy child component that will throw an error

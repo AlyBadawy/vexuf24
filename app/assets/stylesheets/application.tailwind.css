@@ -73,14 +73,4 @@
   body {
     @apply bg-background text-foreground;
   }
-
-  a,
-  a:visited,
-  a:active {
-    @apply font-medium text-indigo-600 dark:text-indigo-400;
-  }
-
-  a:hover {
-    @apply text-indigo-500;
-  }
 }

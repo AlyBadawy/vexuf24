@@ -4,11 +4,15 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 type UIState = {
   isDarkMode: boolean;
   currentRole?: Roles;
+  isSideBarCollapsed: boolean;
+  layOutSizes: number[];
 };
 
 const initialState: UIState = {
   isDarkMode: true, //dark mode is the default
   currentRole: undefined,
+  isSideBarCollapsed: false,
+  layOutSizes: [10, 30, 60],
 };
 
 export const uiSlice = createSlice({
@@ -23,6 +27,14 @@ export const uiSlice = createSlice({
       state.isDarkMode = action.payload;
     },
 
+    setSideBarCollapsed: (state, action: PayloadAction<boolean>) => {
+      state.isSideBarCollapsed = action.payload;
+    },
+
+    setLayOutSizes: (state, action: PayloadAction<number[]>) => {
+      state.layOutSizes = action.payload;
+    },
+
     setCurrentRole: (state, action: PayloadAction<Roles>) => {
       state.currentRole = action.payload;
     },
@@ -33,6 +45,12 @@ export const uiSlice = createSlice({
   },
 });
 
-export const { toggleDarkMode, setDarkMode, setCurrentRole, unSetCurrentRole } =
-  uiSlice.actions;
+export const {
+  toggleDarkMode,
+  setDarkMode,
+  setCurrentRole,
+  unSetCurrentRole,
+  setSideBarCollapsed,
+  setLayOutSizes,
+} = uiSlice.actions;
 export const uiReducer = uiSlice.reducer;

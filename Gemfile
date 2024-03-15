@@ -2,6 +2,7 @@ source "https://rubygems.org"
 
 ruby "3.3.0"
 
+gem "acts_as_list"
 gem "bootsnap", require: false
 gem "devise", "~> 4.9"
 gem "flipper", "~> 1.2"

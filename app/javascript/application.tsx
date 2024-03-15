@@ -4,8 +4,8 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { PersistGate } from 'redux-persist/integration/react';
 import { Provider } from 'react-redux';
-import { TheApp } from '@/app/TheApp';
-import { ThemeProvider } from '@/app/ThemeProvider';
+import { TheApp } from '@/apps/TheApp';
+import { ThemeProvider } from '@/components/ThemeProvider';
 import { persistor, store } from '@/store/store';
 
 import 'react-toastify/dist/ReactToastify.css';
