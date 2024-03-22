@@ -19,7 +19,11 @@ export const DarkModeToggler = () => {
 
   return (
     <div className='fixed right-1 bottom-12'>
-      <Button onClick={toggleDarkMode} data-testid='dark-mode-toggler'>
+      <Button
+        onClick={toggleDarkMode}
+        data-testid='dark-mode-toggler'
+        aria-label={`Set theme to ${currentMode === 'dark' ? 'light' : 'dark'}`}
+      >
         {currentMode === 'dark' ? <Sun /> : <Moon />}
       </Button>
     </div>

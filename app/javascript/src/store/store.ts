@@ -5,17 +5,21 @@ import {
   useSelector,
   type TypedUseSelectorHook,
 } from 'react-redux';
-import { persistReducer, persistStore } from 'redux-persist';
+import { createMigrate, persistReducer, persistStore } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { middlewares } from './middlewares';
 import { accountReducer } from './AccountSlice';
 import { uiReducer } from './uiSlice';
 import { appApi } from './appApi';
+import { persistanceMigrations } from './persistanceMigrations';
 
 const persistConfig = {
   key: 'root',
   storage,
   blacklist: ['api'],
+  throttle: 2500,
+  version: 1,
+  migrate: createMigrate(persistanceMigrations, { debug: false }),
 };
 
 export const rootReducer = combineReducers({
@@ -38,7 +42,7 @@ export const setupStore = () =>
   });
 
 export const store = setupStore();
-export const persistor = persistStore(store);
+export const persistor = persistStore(store, {});
 
 setupListeners(store.dispatch);
 
