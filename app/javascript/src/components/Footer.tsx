@@ -7,13 +7,11 @@ export const Footer = () => {
   const account = useAppSelector((state) => state.account.current);
   const currentRole = useAppSelector((state) => state.ui.currentRole);
   const dispatch = useAppDispatch();
-
   const [signOut] = useSignOutAccountMutation();
 
   const handleLogout = () => {
     void signOut().then(() => {
       dispatch(removeAccount());
-      // window.location.href = '/';
     });
   };
 

@@ -1,34 +1,38 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
+
 import { Footer } from '@/components/Footer';
 import { NavBar } from '@/components/NavBar';
+import { RightSide } from '@/components/rightSide/RightSide';
 import { Sidebar } from '@/components/sidebar/Sidebar';
 import {
   ResizableHandle,
   ResizablePanel,
   ResizablePanelGroup,
 } from '@/components/ui/resizable';
+import { useLayout } from '@/hooks/useLayout';
 import { cn } from '@/lib/shadcn-utils';
-import { useAppDispatch, useAppSelector } from '@/store/store';
-import { setLayOutSizes, setSideBarCollapsed } from '@/store/uiSlice';
+import { useAppDispatch } from '@/store/store';
+import { setLayOut } from '@/store/uiSlice';
+import { LayoutSize } from '@/types/Layout';
 import { debounce } from 'lodash';
 
 type AppWrapperProps = {
-  left?: React.ReactNode;
-  right?: React.ReactNode;
+  children?: React.ReactNode;
 };
 
-export const AppWrapper = ({ left, right }: AppWrapperProps) => {
+export const AppWrapper = ({ children }: AppWrapperProps) => {
   const dispatch = useAppDispatch();
 
-  const isSideBarCollapsed = useAppSelector(
-    (state) => state.ui.isSideBarCollapsed
-  );
-  const layOutSizes = useAppSelector((state) => state.ui.layOutSizes);
+  const layOut = useLayout();
 
   const debouncedOnLayout = debounce((sizes: number[]) => {
-    dispatch(setLayOutSizes(sizes));
-  }, 2000);
+    dispatch(setLayOut(sizes as LayoutSize));
+  }, 300);
+
+  if (!layOut) {
+    return null;
+  }
 
   return (
     <ResizablePanelGroup
@@ -37,27 +41,23 @@ export const AppWrapper = ({ left, right }: AppWrapperProps) => {
       className='h-full items-stretch'
     >
       <ResizablePanel
-        defaultSize={layOutSizes[0]}
+        defaultSize={layOut.sizes[0]}
         collapsedSize={3}
         collapsible={true}
         minSize={10}
-        maxSize={20}
-        onCollapse={() => dispatch(setSideBarCollapsed(true))}
-        onExpand={() => dispatch(setSideBarCollapsed(false))}
+        maxSize={30}
         className={cn(
-          isSideBarCollapsed &&
+          layOut.sideBarCollapsed &&
             'min-w-[50px] transition-all duration-300 ease-in-out'
         )}
       >
-        <Sidebar />
+        {<Sidebar />}
       </ResizablePanel>
       <ResizableHandle withHandle />
-      <ResizablePanel defaultSize={layOutSizes[1]} minSize={30}>
-        {left ?? <></>}
-      </ResizablePanel>
+      <ResizablePanel defaultSize={layOut.sizes[1]}>{children}</ResizablePanel>
       <ResizableHandle withHandle />
-      <ResizablePanel defaultSize={layOutSizes[2]}>
-        {right ?? <></>}
+      <ResizablePanel defaultSize={layOut.sizes[2]} minSize={20} maxSize={45}>
+        {<RightSide />}
       </ResizablePanel>
     </ResizablePanelGroup>
   );

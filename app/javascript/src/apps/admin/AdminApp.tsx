@@ -4,8 +4,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Separator } from '@/components/ui/separator';
 
 export const AdminApp = () => {
-  const Left = () => (
-    <>
+  return (
+    <AppWrapper>
       <Tabs defaultValue='all'>
         <div className='flex items-center px-4 py-2'>
           <h1 className='text-xl font-bold'>Inbox</h1>
@@ -34,15 +34,9 @@ export const AdminApp = () => {
           Mail list
         </TabsContent>
         <TabsContent value='unread' className='m-0'>
-          Unred mail list
+          Unread mail list
         </TabsContent>
       </Tabs>
-    </>
+    </AppWrapper>
   );
-
-  const Right = () => {
-    return <div>Right</div>;
-  };
-
-  return <AppWrapper left={<Left />} right={<Right />} />;
 };
