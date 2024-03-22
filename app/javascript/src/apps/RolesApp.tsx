@@ -16,9 +16,5 @@ export const RolesApp = () => {
       />
     );
   }
-
-  const Left = () => <div>Left</div>;
-  const Right = () => <div>Right</div>;
-
-  return <AppWrapper left={<Left />} right={<Right />} />;
+  return <AppWrapper>Roles</AppWrapper>;
 };
