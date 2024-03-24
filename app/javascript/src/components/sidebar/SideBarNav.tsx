@@ -59,6 +59,7 @@ export function SideBarNav({
 
   return (
     <section
+      data-testid='sidebar-nav'
       className={cn(
         sideBarCollapsed ? '' : 'w-full',
         'flex flex-col gap-2 p-2 items-center',

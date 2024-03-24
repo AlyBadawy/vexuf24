@@ -53,6 +53,7 @@ export const RoleSwitcher = () => {
         isCollapsed ? '' : 'w-full',
         'flex flex-col gap-2 p-2 items-center'
       )}
+      data-testid='role-switcher'
     >
       <Select defaultValue={currentRole} onValueChange={handleRoleChange}>
         <SelectTrigger

@@ -5,6 +5,7 @@ import { Separator } from '../ui/separator';
 import { RoleSwitcher } from './RoleSwitcher';
 import { SideBarNav } from './SideBarNav';
 import { LogOutButton } from './LogOutButton';
+import { SideBarAccountButton } from './SideBarAccountButton';
 import { SideBarSettingsButton } from './SideBarSettingsButton';
 
 export const Sidebar = () => {
@@ -13,7 +14,7 @@ export const Sidebar = () => {
   );
 
   return (
-    <div className='flex flex-col justify-between h-full'>
+    <div className='flex flex-col justify-between h-full' data-testid='sidebar'>
       <div>
         <RoleSwitcher />
         <Separator />
@@ -28,6 +29,7 @@ export const Sidebar = () => {
             'flex flex-col gap-2 p-2 items-center text-xs'
           )}
         >
+          <SideBarAccountButton />
           <SideBarSettingsButton />
           <LogOutButton />
         </section>

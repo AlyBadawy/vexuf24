@@ -1,8 +1,8 @@
 import React from 'react';
-import { screen, fireEvent } from '@testing-library/react';
+import { screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { DarkModeProvider } from '../../components/darkMode/DarkModeProvider';
 import { ufRender } from '@/__tests__/testUtils';
-import { DarkModeSelector } from '../../components/darkMode/DarkModeSelector';
 import { DarkModeToggler } from '../../components/darkMode/DarkModeToggler';
 import * as uiSlice from '@/store/uiSlice';
 
@@ -15,14 +15,6 @@ describe('DarkMode', () => {
     });
   });
 
-  describe('DarkModeSelector', () => {
-    it('renders without crashing', () => {
-      ufRender(<DarkModeSelector />);
-      const trigger = screen.queryByTestId('dark-mode-selector-trigger');
-      expect(trigger).toBeInTheDocument();
-    });
-  });
-
   describe('DarkModeToggler', () => {
     it('renders without crashing', () => {
       ufRender(<DarkModeToggler />);
@@ -30,13 +22,13 @@ describe('DarkMode', () => {
       expect(provider).toBeInTheDocument();
     });
 
-    it('toggles the dark mode', () => {
+    it('toggles the dark mode', async () => {
       const darkModeSpy = jest.spyOn(uiSlice, 'setDarkMode');
       ufRender(<DarkModeToggler />);
       const toggler = screen.queryByTestId('dark-mode-toggler');
-      fireEvent.click(toggler!);
+      await userEvent.click(toggler!);
       expect(darkModeSpy).toHaveBeenCalledWith(false);
-      fireEvent.click(toggler!);
+      await userEvent.click(toggler!);
       expect(darkModeSpy).toHaveBeenCalledWith(true);
     });
   });

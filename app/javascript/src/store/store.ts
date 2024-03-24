@@ -7,7 +7,7 @@ import {
 } from 'react-redux';
 import { createMigrate, persistReducer, persistStore } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-import { middlewares } from './middlewares';
+import { getMiddlewares } from './middlewares';
 import { accountReducer } from './AccountSlice';
 import { uiReducer } from './uiSlice';
 import { appApi } from './appApi';
@@ -38,7 +38,7 @@ export const setupStore = () =>
       getDefaultMiddleware({
         immutableCheck: false,
         serializableCheck: false,
-      }).concat(middlewares),
+      }).concat(getMiddlewares()),
   });
 
 export const store = setupStore();

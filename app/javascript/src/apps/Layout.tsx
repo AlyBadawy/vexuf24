@@ -35,31 +35,35 @@ export const AppWrapper = ({ children }: AppWrapperProps) => {
   }
 
   return (
-    <ResizablePanelGroup
-      direction='horizontal'
-      onLayout={debouncedOnLayout}
-      className='h-full items-stretch'
-    >
-      <ResizablePanel
-        defaultSize={layOut.sizes[0]}
-        collapsedSize={3}
-        collapsible={true}
-        minSize={10}
-        maxSize={30}
-        className={cn(
-          layOut.sideBarCollapsed &&
-            'min-w-[50px] transition-all duration-300 ease-in-out'
-        )}
+    <main data-testid='online-app-layout'>
+      <ResizablePanelGroup
+        direction='horizontal'
+        onLayout={debouncedOnLayout}
+        className='h-full items-stretch'
       >
-        {<Sidebar />}
-      </ResizablePanel>
-      <ResizableHandle withHandle />
-      <ResizablePanel defaultSize={layOut.sizes[1]}>{children}</ResizablePanel>
-      <ResizableHandle withHandle />
-      <ResizablePanel defaultSize={layOut.sizes[2]} minSize={20} maxSize={45}>
-        {<RightSide />}
-      </ResizablePanel>
-    </ResizablePanelGroup>
+        <ResizablePanel
+          defaultSize={layOut.sizes[0]}
+          collapsedSize={3}
+          collapsible={true}
+          minSize={10}
+          maxSize={30}
+          className={cn(
+            layOut.sideBarCollapsed &&
+              'min-w-[50px] transition-all duration-300 ease-in-out'
+          )}
+        >
+          {<Sidebar />}
+        </ResizablePanel>
+        <ResizableHandle withHandle />
+        <ResizablePanel defaultSize={layOut.sizes[1]}>
+          {children}
+        </ResizablePanel>
+        <ResizableHandle withHandle />
+        <ResizablePanel defaultSize={layOut.sizes[2]} minSize={20} maxSize={45}>
+          {<RightSide />}
+        </ResizablePanel>
+      </ResizablePanelGroup>
+    </main>
   );
 };
 

@@ -5,6 +5,9 @@ RSpec.describe "Api::Topics" do
 
   describe "GET /index" do
     it "returns a successful response" do
+      create(:topic)
+      create(:topic, :with_child)
+      create(:topic, :with_parent_and_child)
       get api_topics_path
       expect(response).to have_http_status(:success)
     end

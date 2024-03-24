@@ -13,8 +13,8 @@ import { ErrorBoundary } from '@/components/errorBoundary/ErrorBoundary';
 import { ErrorFallback } from '@/components/errorBoundary/ErrorFallback';
 import { useWindowFlipper } from '@/hooks/useWindow';
 import { ComponentLoader } from '@/routes/ComponentLoader';
-import NotFound from '@/routes/NotFound';
-import OfflineApp from '@/routes/OfflineApp';
+import { NotFound } from '@/routes/NotFound';
+import { OfflineApp } from '@/routes/OfflineApp';
 import {
   AdminRoute,
   AppRoute,
