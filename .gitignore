@@ -41,6 +41,7 @@
 
 coverage/*
 !/coverage/.keep
+!coverage/coverage_badge_total.svg
 
 yarn-error.log
 .DS_Store

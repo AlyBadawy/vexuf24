@@ -36,6 +36,7 @@ export const AppWrapper = ({ children }: AppWrapperProps) => {
 
   return (
     <ResizablePanelGroup
+      data-testid='online-app-layout'
       direction='horizontal'
       onLayout={debouncedOnLayout}
       className='h-full items-stretch'

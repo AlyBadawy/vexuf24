@@ -3,9 +3,9 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 
-export const MySettingsForm = () => {
+export const MyAccountForm = () => {
   return (
-    <div className='grid items-start gap-4'>
+    <div className='grid items-start gap-4' data-testid='my-settings-form'>
       <div className='grid gap-2'>
         <Label htmlFor='email'>Email</Label>
         <Input type='email' id='email' defaultValue='badawy@example.com' />

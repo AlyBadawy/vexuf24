@@ -54,4 +54,22 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 );
 Button.displayName = 'Button';
 
-export { Button, buttonVariants };
+export interface SpanProps
+  extends React.SlotHTMLAttributes<HTMLSpanElement>,
+    VariantProps<typeof buttonVariants> {}
+
+const SpanButton = React.forwardRef<HTMLSpanElement, SpanProps>(
+  ({ className, variant, size, ...props }, ref) => {
+    return (
+      <span
+        className={cn(buttonVariants({ variant, size, className }))}
+        ref={ref}
+        {...props}
+      />
+    );
+  }
+);
+Button.displayName = 'Button';
+SpanButton.displayName = 'ButtonAsSpan';
+
+export { Button, SpanButton, buttonVariants };
