@@ -7,7 +7,7 @@ import {
 import { removeAccount } from './AccountSlice';
 import { toast } from 'react-toastify';
 
-const CSRFToken = () => {
+export const CSRFToken = () => {
   const token = document
     .querySelector('meta[name="csrf-token"]')
     ?.getAttribute('content');
@@ -24,7 +24,7 @@ const baseQuery = fetchBaseQuery({
   },
 });
 
-const baseQueryWithAuth = async (
+const vexUfBaseQuery = async (
   args: string | FetchArgs,
   api: BaseQueryApi,
   extraOptions: Record<string, unknown>
@@ -83,6 +83,6 @@ const baseQueryWithAuth = async (
 };
 
 export const appApi = createApi({
-  baseQuery: baseQueryWithAuth,
+  baseQuery: vexUfBaseQuery,
   endpoints: (_builder) => ({}),
 });

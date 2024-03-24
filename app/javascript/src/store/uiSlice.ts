@@ -2,7 +2,7 @@ import { Layout, LayoutSize } from '@/types/Layout';
 import { Roles } from '@/types/Role';
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
-type UIState = {
+export type UIState = {
   isDarkMode: boolean;
   currentRole?: Roles;
   layOut: Layout;

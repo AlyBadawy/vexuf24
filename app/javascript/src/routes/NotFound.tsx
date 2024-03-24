@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const NotFound = () => {
+export const NotFound = () => {
   return (
     <div className='flex flex-col h-full'>
       <main className='flex flex-col flex-1 mx-4'>
@@ -26,7 +26,7 @@ const NotFound = () => {
           </p>
           <p>
             If you continue to experience issues or have any questions, please
-            feel free to contact us at support@sys4.dev. We apologize for any
+            feel free to contact us at support@vexuf.com. We apologize for any
             inconvenience and thank you for your understanding.
           </p>
         </div>
@@ -34,5 +34,3 @@ const NotFound = () => {
     </div>
   );
 };
-
-export default NotFound;

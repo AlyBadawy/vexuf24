@@ -7,7 +7,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from '../ui/sheet';
-import { Button, buttonVariants } from '../ui/button';
+import { Button, SpanButton, buttonVariants } from '../ui/button';
 import { cn } from '@/lib/shadcn-utils';
 import { ExitIcon } from '@radix-ui/react-icons';
 import { useAppDispatch, useAppSelector } from '@/store/store';
@@ -31,7 +31,8 @@ export const LogOutButton = () => {
   return (
     <Sheet>
       <SheetTrigger className='w-full'>
-        <Button
+        <SpanButton
+          data-testid='log-out-button'
           variant='ghost'
           size='lg'
           className={cn(
@@ -45,7 +46,7 @@ export const LogOutButton = () => {
         >
           <ExitIcon />
           {!isSideBarCollapsed && <span className='ml-2'>Log out</span>}
-        </Button>
+        </SpanButton>
       </SheetTrigger>
       <SheetContent side='left' className='h-full'>
         <SheetHeader className='h-full'>
@@ -59,6 +60,7 @@ export const LogOutButton = () => {
             </div>
             <div>
               <Button
+                data-testid='confirm-log-out-button'
                 variant='destructive'
                 size='lg'
                 className={cn(

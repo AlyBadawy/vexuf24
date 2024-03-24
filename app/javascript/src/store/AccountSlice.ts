@@ -1,7 +1,7 @@
 import { Account } from '@/types/Account';
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
-type AccountState = {
+export type AccountState = {
   current?: Account;
 };
 

@@ -29,6 +29,13 @@ RSpec.describe "Statics" do
     end
   end
 
+  describe "GET /cookies_banner" do
+    it "returns http success" do
+      get "/cookies_banner"
+      expect(response).to have_http_status(:success)
+    end
+  end
+
   describe "GET /tos" do
     it "returns http success" do
       get "/tos"
