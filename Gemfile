@@ -49,5 +49,6 @@ end
 group :test do
   gem "selenium-webdriver"
   gem "simplecov"
+  gem "simplecov-small-badge", :require => false
   gem "webdrivers"
 end
