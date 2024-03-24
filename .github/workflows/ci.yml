@@ -85,13 +85,3 @@ jobs:
         with:
           name: screenshots
           path: tmp/screenshots
-      - name: Upload simplecov
-        uses: actions/upload-artifact@v2
-        with:
-          name: simplecov
-          path: coverage/.last_run.json
-      - name: Upload simplecov Badge
-        uses: actions/upload-artifact@v2
-        with:
-          name: simplecov badge
-          path: coverage/coverage_badge_total.svg
