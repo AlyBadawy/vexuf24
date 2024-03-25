@@ -1,5 +1,8 @@
 require "json"
 
+Rails.logger = Logger.new($stdout)
+Rails.logger.level = Logger::INFO
+
 # Create default rules for the application
 # Define the roles
 roles = JSON.parse(File.read(File.join(File.dirname(__FILE__), "seeds/roles.json")))
@@ -15,7 +18,7 @@ topics = JSON.parse(File.read(File.join(File.dirname(__FILE__), "seeds/topics.js
 
 def create_topics(name, children, parent_id = nil)
   topic = Topic.find_or_create_by(name: name, parent_id: parent_id)
-  puts "Creating topic: #{topic.name} with full path: #{topic.full_path}" # rubocop:disable Rails/Output
+  Rails.logger.info "Creating topic: #{topic.name} with full path: #{topic.full_path}"
 
   if children.is_a? Array
     children.each do |child_name|

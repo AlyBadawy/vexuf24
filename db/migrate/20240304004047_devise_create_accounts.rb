@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class DeviseCreateAccounts < ActiveRecord::Migration[7.1]
-  def change # rubocop:disable Metrics/MethodLength
+  def change
     create_table :accounts, id: :uuid do |t|
       ## Database authenticatable
       t.string :email, null: false, default: ""
