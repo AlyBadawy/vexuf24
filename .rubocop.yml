@@ -176,6 +176,8 @@ Metrics/ModuleLength:
 Metrics/MethodLength:
   Enabled: true
   Max: 20
+  Exclude:
+    - 'db/migrate/*.rb'
 
 Rails:
   Enabled: true # enable rubocop-rails cops

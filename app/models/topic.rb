@@ -1,15 +1,15 @@
-# rubocop:disable Rails/InverseOf
-
 class Topic < ApplicationRecord
-  has_many :child_topics, # rubocop:disable Rails/InverseOf
+  has_many :child_topics,
            class_name: "Topic",
            foreign_key: "parent_id",
-           dependent: :destroy
+           dependent: :destroy,
+           inverse_of: :parent_topic
 
   belongs_to :parent_topic,
              class_name: "Topic",
              optional: true,
-             foreign_key: "parent_id"
+             foreign_key: "parent_id",
+             inverse_of: :child_topics
 
   has_many :notes_topics, dependent: :destroy
   has_many :notes, through: :notes_topics
@@ -30,5 +30,3 @@ class Topic < ApplicationRecord
     parent_topic ? "#{parent_topic.full_path} -> #{name}" : name
   end
 end
-
-# rubocop:enable Rails/InverseOf
