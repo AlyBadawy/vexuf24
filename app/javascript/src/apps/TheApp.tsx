@@ -31,7 +31,7 @@ export const TheApp = () => {
 
   const debouncedOnLayout = debounce((sizes: number[]) => {
     dispatch(setLayOutSizes(sizes as LayoutSize));
-  }, 300);
+  }, 150);
 
   if (!account) {
     return <NoAccount />;
