@@ -1,23 +1,21 @@
 import React from 'react';
 import { cn } from '@/lib/shadcn-utils';
-import { useAppSelector } from '@/store/store';
 import { Separator } from '../ui/separator';
-import { RoleSwitcher } from './RoleSwitcher';
 import { SideBarNav } from './SideBarNav';
 import { LogOutButton } from './LogOutButton';
 import { SideBarAccountButton } from './SideBarAccountButton';
 import { SideBarSettingsButton } from './SideBarSettingsButton';
+import { useSideBarCollapsed } from '@/hooks/useLayout';
 
 export const Sidebar = () => {
-  const isSideBarCollapsed = useAppSelector(
-    (state) => state.ui.layOut[state.ui.currentRole!][0] === 3
-  );
+  const isSideBarCollapsed = useSideBarCollapsed();
 
   return (
-    <div className='flex flex-col justify-between h-full' data-testid='sidebar'>
+    <div
+      className='flex flex-col justify-between h-[calc(100dvh-115px)] rounded-md bg-primary/5 m-2 overflow-x-hidden'
+      data-testid='sidebar'
+    >
       <div>
-        <RoleSwitcher />
-        <Separator />
         <SideBarNav />
         <Separator />
       </div>

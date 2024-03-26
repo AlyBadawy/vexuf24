@@ -6,9 +6,9 @@ FactoryBot.define do
     last_name { Faker::Name.last_name }
     phone_number { Faker::PhoneNumber.phone_number }
 
-    trait :therapist do
+    trait :care_giver do
       after(:create) do |account|
-        account.roles << Role.find_or_create_by(name: "therapist")
+        account.roles << Role.find_or_create_by(name: "doctor")
       end
     end
 

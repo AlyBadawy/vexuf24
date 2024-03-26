@@ -1,7 +1,7 @@
 import React from 'react';
 import { screen } from '@testing-library/react';
 import { ufRender } from '../testUtils';
-import { OfflineApp } from '@/routes/OfflineApp';
+import { OfflineApp } from '@/components/fallbacks/OfflineApp';
 
 describe('OfflineApp', () => {
   it('renders main elements', () => {

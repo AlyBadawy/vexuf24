@@ -10,14 +10,13 @@ import {
 import { Button, SpanButton, buttonVariants } from '../ui/button';
 import { cn } from '@/lib/shadcn-utils';
 import { ExitIcon } from '@radix-ui/react-icons';
-import { useAppDispatch, useAppSelector } from '@/store/store';
+import { useAppDispatch } from '@/store/store';
 import { useSignOutAccountMutation } from '@/store/AccountApi';
 import { removeAccount } from '@/store/AccountSlice';
+import { useSideBarCollapsed } from '@/hooks/useLayout';
 
 export const LogOutButton = () => {
-  const isSideBarCollapsed = useAppSelector(
-    (state) => state.ui.layOut[state.ui.currentRole!][0] === 3
-  );
+  const isSideBarCollapsed = useSideBarCollapsed();
 
   const dispatch = useAppDispatch();
   const [signOut] = useSignOutAccountMutation();
@@ -38,8 +37,8 @@ export const LogOutButton = () => {
           className={cn(
             buttonVariants({ variant: 'ghost' }),
             isSideBarCollapsed
-              ? 'justify-center py-2 px-3'
-              : 'justify-start w-full',
+              ? 'justify-center py-2 px-0'
+              : 'justify-start min-w-fit w-full',
             'hover:bg-gray-500/10 d-inline-flex gap-2'
           )}
           aria-label='Log out'

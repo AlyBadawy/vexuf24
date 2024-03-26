@@ -1,7 +1,7 @@
 import React from 'react';
 import { screen } from '@testing-library/react';
 import { ufRender } from '../testUtils';
-import { NotFound } from '@/routes/NotFound';
+import { NotFound } from '@/components/fallbacks/NotFound';
 
 describe('NotFound', () => {
   it('renders main elements', () => {

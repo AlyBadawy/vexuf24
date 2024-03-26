@@ -1,7 +1,7 @@
 import React from 'react';
 import { DialogDrawerWrapper } from '../ui/DialogDrawerWrapper';
-import { MyAccountButton } from '@/apps/shared/myAccount/MyAccountButton';
-import { MyAccountForm } from '@/apps/shared/myAccount/MyAccountForm';
+import { MyAccountButton } from '@/components/myAccount/MyAccountButton';
+import { MyAccountForm } from '@/components/myAccount/MyAccountForm';
 
 export const SideBarAccountButton = () => {
   return (

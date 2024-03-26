@@ -10,7 +10,7 @@ RSpec.describe Note do
   describe "associations" do
     subject(:note) { build(:note) }
 
-    it { is_expected.to belong_to(:therapy_session) }
+    it { is_expected.to belong_to(:care_session) }
     it { is_expected.to have_many(:notes_topics) }
     it { is_expected.to have_many(:topics).through(:notes_topics) }
   end

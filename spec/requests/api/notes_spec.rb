@@ -20,8 +20,8 @@ RSpec.describe "Api::Notes" do
   end
 
   describe "POST /create" do
-    let(:therapy_session) { create(:therapy_session) }
-    let(:valid_attributes) { { content: "Note content", therapy_session_id: therapy_session.id } }
+    let(:care_session) { create(:care_session) }
+    let(:valid_attributes) { { content: "Note content", care_session_id: care_session.id } }
 
     it "creates a new Note" do
       expect {

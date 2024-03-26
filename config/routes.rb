@@ -30,5 +30,4 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root "static#home"
-  get "/app/*path", to: "react#app"
 end

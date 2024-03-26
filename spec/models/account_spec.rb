@@ -22,8 +22,8 @@ RSpec.describe Account do
   describe "associations" do
     subject(:account) { build(:account) }
 
-    it { is_expected.to have_many(:patient_sessions).class_name("TherapySession") }
-    it { is_expected.to have_many(:therapist_sessions).class_name("TherapySession") }
+    it { is_expected.to have_many(:patient_sessions).class_name("CareSession") }
+    it { is_expected.to have_many(:care_giver_sessions).class_name("CareSession") }
     it { is_expected.to have_many(:account_roles) }
     it { is_expected.to have_many(:roles).through(:account_roles) }
   end

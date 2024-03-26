@@ -73,4 +73,8 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  hr {
+    @apply border-t border-border my-4;
+  }
 }

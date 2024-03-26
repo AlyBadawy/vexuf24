@@ -1,104 +1,67 @@
 import React from 'react';
-import {
-  Outlet,
-  RouteObject,
-  RouterProvider,
-  createBrowserRouter,
-} from 'react-router-dom';
-import { AppOutlet } from '@/apps/Layout';
-import { RolesApp } from '@/apps/RolesApp';
-import { ThemeProvider } from '@/components/ThemeProvider';
-import { AccountProvider } from '@/components/AccountProvider';
-import { ErrorBoundary } from '@/components/errorBoundary/ErrorBoundary';
-import { ErrorFallback } from '@/components/errorBoundary/ErrorFallback';
-import { useWindowFlipper } from '@/hooks/useWindow';
-import { ComponentLoader } from '@/routes/ComponentLoader';
-import { NotFound } from '@/routes/NotFound';
-import { OfflineApp } from '@/routes/OfflineApp';
-import {
-  AdminRoute,
-  AppRoute,
-  GuestRoute,
-  PatientRoute,
-  PrivateRoute,
-  TherapistRoute,
-} from '@/routes/RouteGates';
-import { TherapistApp } from './therapist/TherapistApp';
-import { PatientApp } from './patient/PatientApp';
-import { AdminApp } from './admin/AdminApp';
 
-const OnlineRouterConfig: RouteObject[] = [
-  {
-    path: 'app',
-    element: <AppOutlet />,
-    errorElement: <ErrorFallback />,
-    children: [
-      {
-        path: 'guest',
-        element: <GuestRoute />,
-        children: [{ path: '*', element: <p>Guest App Route</p> }],
-      },
-      {
-        path: '*',
-        element: <PrivateRoute />,
-        children: [
-          {
-            index: true,
-            element: <AppRoute />,
-          },
-          {
-            path: 'roles',
-            element: <PrivateRoute />,
-            children: [{ index: true, element: <RolesApp /> }],
-          },
-          {
-            path: 'admin',
-            element: <AdminRoute />,
-            children: [{ index: true, element: <AdminApp /> }],
-          },
-          {
-            path: 'therapist',
-            element: <TherapistRoute />,
-            children: [{ index: true, element: <TherapistApp /> }],
-          },
-          {
-            path: 'patient',
-            element: <PatientRoute />,
-            children: [{ index: true, element: <PatientApp /> }],
-          },
-          {
-            path: '*',
-            element: <NotFound />,
-          },
-        ],
-      },
-    ],
-  },
-];
-
-const OfflineRouterConfig = [
-  {
-    path: '/app',
-    element: <Outlet />,
-    children: [
-      { index: true, element: <ComponentLoader component={<OfflineApp />} /> },
-      { path: '*', element: <ComponentLoader component={<OfflineApp />} /> },
-    ],
-  },
-];
+import { debounce } from 'lodash';
+import { useLayoutSizes, useSideBarCollapsed } from '@/hooks/useLayout';
+import { cn } from '@/lib/shadcn-utils';
+import { RightSide } from '@/apps/RightSide';
+import { LeftSide } from '@/apps/LeftSide';
+import { NoAccount } from './NoAccount';
+import { useAppDispatch, useAppSelector } from '@/store/store';
+import { setLayOutSizes } from '@/store/uiSlice';
+import { Sidebar } from '@/components/sidebar/Sidebar';
+import {
+  ResizableHandle,
+  ResizablePanel,
+  ResizablePanelGroup,
+} from '@/components/ui/resizable';
+import { LayoutSize } from '@/types/Layout';
 
 export const TheApp = () => {
-  const isOnline = useWindowFlipper('app_online');
-  const OnlineRouter = createBrowserRouter(OnlineRouterConfig);
-  const OfflineRouter = createBrowserRouter(OfflineRouterConfig);
+  const dispatch = useAppDispatch();
+  const sidebarSize = useLayoutSizes(0);
+  const summaryPanelSize = useLayoutSizes(1);
+  const detailPanelSize = useLayoutSizes(2);
+  const sideBarCollapsed = useSideBarCollapsed();
+
+  const account = useAppSelector((state) => state.account.current);
+
+  const sideBarClassName = cn(
+    sideBarCollapsed && 'min-w-[50px] transition-all duration-300 ease-in-out'
+  );
+
+  const debouncedOnLayout = debounce((sizes: number[]) => {
+    dispatch(setLayOutSizes(sizes as LayoutSize));
+  }, 300);
+
+  if (!account) {
+    return <NoAccount />;
+  }
 
   return (
-    <>
-      <ErrorBoundary>
-        <AccountProvider />
-        <ThemeProvider />
-        <RouterProvider router={isOnline ? OnlineRouter : OfflineRouter} />
-      </ErrorBoundary>
-    </>
+    <ResizablePanelGroup
+      data-testid='online-app-layout'
+      direction='horizontal'
+      onLayout={debouncedOnLayout}
+      className='h-full items-stretch'
+    >
+      <ResizablePanel
+        defaultSize={sidebarSize}
+        collapsedSize={3}
+        collapsible={true}
+        minSize={8}
+        maxSize={15}
+        className={sideBarClassName}
+      >
+        <Sidebar />
+      </ResizablePanel>
+      <ResizableHandle withHandle />
+      <ResizablePanel defaultSize={summaryPanelSize}>
+        <LeftSide />
+      </ResizablePanel>
+      <ResizableHandle withHandle />
+      <ResizablePanel defaultSize={detailPanelSize} minSize={20} maxSize={60}>
+        <RightSide />
+      </ResizablePanel>
+    </ResizablePanelGroup>
   );
 };

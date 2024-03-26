@@ -1,5 +1,5 @@
 class Note < ApplicationRecord
-  belongs_to :therapy_session
+  belongs_to :care_session
   has_many :notes_topics, dependent: :destroy
   has_many :topics, through: :notes_topics
 

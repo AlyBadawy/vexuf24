@@ -1,23 +1,12 @@
-import { Layout, LayoutSize } from '@/types/Layout';
-import { Roles } from '@/types/Role';
+import { LayOut, LayoutSize, UIState } from '@/types/Layout';
+import { Modules } from '@/types/Modules';
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-
-export type UIState = {
-  isDarkMode: boolean;
-  currentRole?: Roles;
-  layOut: Layout;
-  currentModule?: string;
-};
 
 const initialState: UIState = {
   isDarkMode: true, //dark mode is the default
-  currentRole: undefined,
-  currentModule: 'dashboard',
-  layOut: {
-    [Roles.Admin]: [3, 72, 25],
-    [Roles.Therapist]: [3, 72, 25],
-    [Roles.Patient]: [3, 72, 25],
-  },
+  currentModule: Modules.Dashboard,
+  layOutSizes: [3, 72, 25],
+  layout: LayOut.DEFAULT,
 };
 
 export const uiSlice = createSlice({
@@ -28,32 +17,20 @@ export const uiSlice = createSlice({
       state.isDarkMode = action.payload;
     },
 
-    setLayOut: (state, action: PayloadAction<LayoutSize>) => {
-      const currentRole = state.currentRole;
-      if (currentRole === undefined) return;
-
-      state.layOut[currentRole] = action.payload;
+    setLayOutSizes: (state, action: PayloadAction<LayoutSize>) => {
+      state.layOutSizes = action.payload;
     },
 
-    setCurrentRole: (state, action: PayloadAction<Roles>) => {
-      state.currentRole = action.payload;
-    },
-
-    unSetCurrentRole: (state, _action: PayloadAction<void>) => {
-      state.currentRole = undefined;
-    },
-
-    setCurrentModule: (state, action: PayloadAction<string>) => {
+    setCurrentModule: (state, action: PayloadAction<Modules>) => {
       state.currentModule = action.payload;
+    },
+
+    setLayout: (state, action: PayloadAction<LayOut>) => {
+      state.layout = action.payload;
     },
   },
 });
 
-export const {
-  setDarkMode,
-  setCurrentRole,
-  unSetCurrentRole,
-  setLayOut,
-  setCurrentModule,
-} = uiSlice.actions;
+export const { setDarkMode, setLayOutSizes, setCurrentModule } =
+  uiSlice.actions;
 export const uiReducer = uiSlice.reducer;
