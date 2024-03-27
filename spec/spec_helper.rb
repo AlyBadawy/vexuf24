@@ -31,4 +31,5 @@ SimpleCovSmallBadge.configure do |config|
   config.rounded_border = true
   # set the background for the title to darkgrey
   config.background = "#ffffcc"
+  config.title_prefix = "Spec"
 end
