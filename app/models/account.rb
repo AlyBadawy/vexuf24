@@ -8,8 +8,8 @@ class Account < ApplicationRecord
   has_many :account_roles, dependent: :destroy
   has_many :roles, through: :account_roles
 
-  has_many :patient_sessions, class_name: "TherapySession", foreign_key: "patient_id", dependent: :destroy, inverse_of: :patient
-  has_many :therapist_sessions, class_name: "TherapySession", foreign_key: "therapist_id", dependent: :nullify, inverse_of: :therapist
+  has_many :patient_sessions, class_name: "CareSession", foreign_key: "patient_id", dependent: :destroy, inverse_of: :patient
+  has_many :care_giver_sessions, class_name: "CareSession", foreign_key: "care_giver_id", dependent: :nullify, inverse_of: :care_giver
 
   has_paper_trail
 

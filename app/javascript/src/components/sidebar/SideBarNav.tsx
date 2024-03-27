@@ -3,17 +3,12 @@ import { Button, buttonVariants } from '../ui/button';
 import { cn } from '@/lib/shadcn-utils';
 import { useAppDispatch, useAppSelector } from '@/store/store';
 import { setCurrentModule } from '@/store/uiSlice';
-import { Roles } from '@/types/Role';
-import {
-  DashboardIcon,
-  PersonIcon,
-  ChatBubbleIcon,
-  MixerHorizontalIcon,
-} from '@radix-ui/react-icons';
-import { useLayout } from '@/hooks/useLayout';
+import { DashboardIcon } from '@radix-ui/react-icons';
+import { useSideBarCollapsed } from '@/hooks/useLayout';
+import { Modules } from '@/types/Modules';
 
 type SideNavItem = {
-  module: string;
+  module: Modules;
   title: string;
   icon: React.FC<React.SVGProps<SVGSVGElement>>;
 };
@@ -24,44 +19,25 @@ export function SideBarNav({
   ...props
 }: React.HTMLAttributes<HTMLElement>) {
   const dispatch = useAppDispatch();
-  const currentRole = useAppSelector((state) => state.ui.currentRole);
   const currentModule = useAppSelector((state) => state.ui.currentModule);
 
-  const sideBarCollapsed = useLayout()?.sideBarCollapsed;
+  const isSideBarCollapsed = useSideBarCollapsed();
 
   const AdminItems: SideNavItem[] = [
-    { module: 'dashboard', title: 'Dashboard', icon: () => <DashboardIcon /> },
-    { module: 'accounts', title: 'Accounts', icon: () => <PersonIcon /> },
-    { module: 'messages', title: 'Messages', icon: () => <ChatBubbleIcon /> },
     {
-      module: 'settings',
-      title: 'Settings',
-      icon: () => <MixerHorizontalIcon />,
+      module: Modules.Dashboard,
+      title: 'Dashboard',
+      icon: () => <DashboardIcon />,
     },
   ];
-  const TherapistItems: SideNavItem[] = [];
-  const PatientItems: SideNavItem[] = [];
 
-  let items: SideNavItem[];
-  switch (currentRole) {
-    case Roles.Admin:
-      items = AdminItems;
-      break;
-    case Roles.Therapist:
-      items = TherapistItems;
-      break;
-    case Roles.Patient:
-      items = PatientItems;
-      break;
-    default:
-      items = [];
-  }
+  const items = AdminItems;
 
   return (
     <section
       data-testid='sidebar-nav'
       className={cn(
-        sideBarCollapsed ? '' : 'w-full',
+        isSideBarCollapsed ? '' : 'w-full',
         'flex flex-col gap-2 p-2 items-center',
         className
       )}
@@ -77,15 +53,15 @@ export function SideBarNav({
             currentModule === item.module
               ? 'bg-muted hover:bg-muted'
               : 'hover:bg-gray-500/10',
-            sideBarCollapsed
+            isSideBarCollapsed
               ? 'justify-center py-2 px-3'
-              : 'justify-start w-full'
+              : 'justify-start min-w-fit w-full'
           )}
           onClick={() => dispatch(setCurrentModule(item.module))}
           aria-label={`Select ${item.title} module`}
         >
           <item.icon />
-          {!sideBarCollapsed && <span className='ml-2'>{item.title}</span>}
+          {!isSideBarCollapsed && <span className='ml-2'>{item.title}</span>}
         </Button>
       ))}
     </section>

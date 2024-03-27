@@ -7,7 +7,6 @@ describe('SideBar', () => {
   it('renders correctly', () => {
     ufRender(<Sidebar />);
     expect(screen.getByTestId('sidebar')).toBeInTheDocument();
-    expect(screen.getByTestId('role-switcher')).toBeInTheDocument();
     expect(screen.getByTestId('sidebar-nav')).toBeInTheDocument();
     expect(screen.getByTestId('log-out-button')).toBeInTheDocument();
   });

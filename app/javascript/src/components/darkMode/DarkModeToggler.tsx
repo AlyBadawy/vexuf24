@@ -18,7 +18,7 @@ export const DarkModeToggler = () => {
   };
 
   return (
-    <div className='fixed right-1 bottom-12'>
+    <div className='fixed right-1 bottom-32 z-50'>
       <Button
         onClick={toggleDarkMode}
         data-testid='dark-mode-toggler'

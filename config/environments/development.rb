@@ -81,4 +81,7 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { host: "localhost", port: 3000 }
 
   config.log_level = :debug
+
+  config.hosts << "hmfnpcws-3000.use.devtunnels.ms"
+  config.action_controller.forgery_protection_origin_check = false
 end

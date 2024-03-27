@@ -1,12 +1,7 @@
 export type Role = {
   id: string;
-  name: Roles;
+  name: string;
+  description?: string;
   icon?: string;
   position: number;
 };
-
-export enum Roles {
-  Admin = 'Admin',
-  Therapist = 'Therapist',
-  Patient = 'Patient',
-}

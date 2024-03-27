@@ -43,21 +43,21 @@ end
 
 # Fetch the patient and therapist accounts
 patient_account = Account.find_by(email: "patient@example.com")
-therapist_account = Account.find_by(email: "therapist@example.com")
+doctor_account = Account.find_by(email: "doctor@example.com")
 
-# Create 2 therapy sessions
+# Create 2 Care sessions
 2.times do |i|
-  session = TherapySession.create(
+  session = CareSession.create(
     session_datetime: DateTime.now + i.days,
     patient: patient_account,
-    therapist: therapist_account,
+    care_giver: doctor_account,
   )
 
   # Create 3 notes for each session
   3.times do |j|
     note = Note.create(
       content: { text: "Note #{j + 1} for Therapy Session #{i + 1}", position: j + 1 },
-      therapy_session: session,
+      care_session: session,
     )
 
     # Assign a topic to each note

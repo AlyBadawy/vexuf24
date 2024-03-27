@@ -1,7 +1,7 @@
 import React from 'react';
 import { DialogDrawerWrapper } from '../ui/DialogDrawerWrapper';
-import { MySettingsForm } from '@/apps/shared/mySettings/MySettingsForm';
-import { MySettingsButton } from '@/apps/shared/mySettings/MySettingsButton';
+import { MySettingsForm } from '@/components/mySettings/MySettingsForm';
+import { MySettingsButton } from '@/components/mySettings/MySettingsButton';
 
 export const SideBarSettingsButton = () => {
   return (

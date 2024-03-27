@@ -39,7 +39,7 @@ module Api
 
     # Only allow a list of trusted parameters through.
     def note_params
-      params.require(:note).permit(:content, :therapy_session_id)
+      params.require(:note).permit(:content, :care_session_id)
     end
   end
 end

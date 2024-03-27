@@ -1,5 +1,10 @@
 [
   { "name": "Admin", "position": 1 },
-  { "name": "Therapist", "position": 2 },
-  { "name": "Patient", "position": 3 }
+  { "name": "Doctor", "position": 2 },
+  { "name": "Nurse", "position": 3 },
+  { "name": "Patient", "position": 4 },
+  { "name": "Pharmacist", "position": 5 },
+  { "name": "Lab Technician", "position": 6 },
+  { "name": "Receptionist", "position": 7 },
+  { "name": "Other", "position": 8 }
 ]

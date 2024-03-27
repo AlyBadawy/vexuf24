@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :note do
     content { "MyText" }
-    therapy_session
+    care_session
   end
 end

@@ -3,7 +3,7 @@ import React from 'react';
 
 export const ErrorFallback = ({ error }: { error?: Error }) => {
   return (
-    <div className='w-100 h-screen bg-rose-400 dark:bg-red-800 pt-8 md:pt-16 lg:pt-32'>
+    <div className='w-100 h-[calc(100dvh)] bg-rose-400 dark:bg-red-800 pt-8 md:pt-16 lg:pt-32'>
       <div className='container'>
         <div className='flex flex-column md:flex-row'>
           <div className='flex-1'>
