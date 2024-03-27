@@ -50,11 +50,11 @@ const vexUfBaseQuery = async (
     );
   }
 
-  if (result?.error?.status === 301) {
+  if (result?.error?.status === 401) {
     api.dispatch(removeAccount());
     toast.error('You have been signed out', { toastId: 'signedOut' });
   }
-  if (result?.error?.status === 303) {
+  if (result?.error?.status === 403) {
     toast.error('You do not have access to this resource', {
       toastId: 'AccessDenied',
     });
