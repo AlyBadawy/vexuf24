@@ -8,7 +8,6 @@ module.exports = {
     '!<rootDir>/app/javascript/src/__tests__/**/*.{js,jsx,ts,tsx}',
     '!<rootDir>/app/javascript/src/**/*.d.ts',
   ],
-  coverageReporters: ['json-summary', 'text', 'lcov'],
   preset: 'ts-jest',
   testEnvironment: 'jsdom',
   transform: {
